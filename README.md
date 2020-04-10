@@ -3,7 +3,7 @@
 El microservicio expone un único recurso: operaciones sobre una única agrupación: calculadora.
 
 
-La operación expuesta realiza (crea) una operación de cálculo, devolviendo el resultado de dicha operación. El path: calculadora/operaciones
+La firma expuesta calcula (crea un cálculo - POST) sobre una operación, devolviendo el resultado de dicha operación. El path: calculadora/operaciones
 
 
 Pongo un ejemplo de llamada en cURL:
@@ -23,8 +23,9 @@ El jar generado tras hacer "mvn install" en la raíz del proyecto se ejecuta de 
 java -jar Calculadora-1.0.0.jar
 
 
+Se implementa el feature que permite calcular múltiples operaciones agrupadas bajo la misma entrada en la rama: feature/Agrupacion_Operaciones
+
 
 Más cosas que se podrían haber hecho:
  - Aplicar git-flow como metodología Git
- - Hacerlo bajo Spring WebFlux (pero no sé si Sanitas admite proyectos bajo stack reactivo)
- - Preparar la jerarquía para aceptar múltiples operaciones hijas (patrón Composite debería ser el elegido)  -- Este si tengo tiempo, mañana lo hago (que me pica la curiosidad)
+ - Hacerlo bajo Spring WebFlux (pero no sé si Sanitas admite proyectos bajo stack reactivo y no se gana mucho bajo esta operación tan simple)
