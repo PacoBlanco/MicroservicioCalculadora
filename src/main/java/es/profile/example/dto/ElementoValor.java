@@ -19,5 +19,9 @@ public class ElementoValor implements IElementoOperacion {
 	public BigDecimal computar() {
 		return elemento;
 	}
+
+	public BigDecimal getElemento() {
+		return elemento;
+	}
 	
 }

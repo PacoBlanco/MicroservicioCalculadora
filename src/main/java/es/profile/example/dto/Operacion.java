@@ -3,6 +3,7 @@ package es.profile.example.dto;
 import java.math.BigDecimal;
 import java.util.function.BinaryOperator;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 
@@ -21,9 +22,11 @@ public class Operacion {
 	@NotNull
 	private TipoOperacion operacion;
 	
+	@Valid
 	@NotNull
 	private IElementoOperacion miembroIzquierdo;
 	
+	@Valid
 	@NotNull
 	private IElementoOperacion miembroDerecho;
 	
