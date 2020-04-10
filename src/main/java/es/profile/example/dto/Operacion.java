@@ -1,63 +1,55 @@
 package es.profile.example.dto;
 
 import java.math.BigDecimal;
+import java.util.function.BinaryOperator;
 
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property="operacion",visible = true)
-@JsonSubTypes({
-	@Type(value = Suma.class, name = "SUMA"),
-	@Type(value = Resta.class, name = "RESTA")
-})
-public abstract class Operacion {
+public class Operacion {
 
 	public enum TipoOperacion {
-		SUMA, RESTA;
+		SUMA(BigDecimal::add), RESTA(BigDecimal::subtract);
+		
+		private final BinaryOperator<BigDecimal> operador;
+
+		private TipoOperacion(BinaryOperator<BigDecimal> operador) {
+			this.operador = operador;
+		}
 	}
 	
 	@NotNull
 	private TipoOperacion operacion;
 	
 	@NotNull
-	private BigDecimal miembroIzquierdo;
+	private IElementoOperacion miembroIzquierdo;
 	
 	@NotNull
-	private BigDecimal miembroDerecho;
+	private IElementoOperacion miembroDerecho;
 	
 	
-	public Operacion() {
-		super();
+	
+	public BigDecimal computar() {
+		return operacion.operador.apply(getMiembroIzquierdo().computar(), getMiembroDerecho().computar());
 	}
-
-	public Operacion(@NotNull TipoOperacion operacion) {
-		super();
-		this.operacion = operacion;
-	}
-
-
-	public abstract BigDecimal computar();
 	
 	
 	public TipoOperacion getOperacion() {
 		return operacion;
 	}
-	public void setOperacion(TipoOperacion operacion) {
+	public void setOperacion(@NotNull TipoOperacion operacion) {
 		this.operacion = operacion;
 	}
-	public BigDecimal getMiembroIzquierdo() {
+	public IElementoOperacion getMiembroIzquierdo() {
 		return miembroIzquierdo;
 	}
-	public void setMiembroIzquierdo(BigDecimal miembroIzquierdo) {
+	public void setMiembroIzquierdo(IElementoOperacion miembroIzquierdo) {
 		this.miembroIzquierdo = miembroIzquierdo;
 	}
-	public BigDecimal getMiembroDerecho() {
+	public IElementoOperacion getMiembroDerecho() {
 		return miembroDerecho;
 	}
-	public void setMiembroDerecho(BigDecimal miembroDerecho) {
+	public void setMiembroDerecho(IElementoOperacion miembroDerecho) {
 		this.miembroDerecho = miembroDerecho;
 	}
 	
