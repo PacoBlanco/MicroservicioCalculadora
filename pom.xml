@@ -38,13 +38,26 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		
-			
+		
 		<dependency>
 			<groupId>sanitas</groupId>
 			<artifactId>tracer</artifactId>
 			<scope>system</scope>
 			<version>1.0.0</version>
 			<systemPath>${basedir}/lib/sanitas/tracer/1.0.0/tracer-1.0.0.jar</systemPath>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 	</dependencies>
