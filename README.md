@@ -5,7 +5,7 @@ El microservicio expone un único recurso: operaciones sobre una única agrupaci
 
 La firma del recurso expuesta calcula (crea un cálculo - POST) sobre una agrupación de operaciones de cálculo, devolviendo el resultado de dicha operación. El path: calculadora/operaciones
 
-Por ejemplo, si queremos calcular: 1.01 - 3.03 - 1.01 - 3.03, debemos saber que el operador resto no es conmutativo e, internamente, debemos dar prioridad a la ejecución de los cálculos de izquierda a derecha por lo que la operación podría extenderse a lo siguente: (((1.01 - 3.03) - 1.0.1) - 3.03) y el cURL de esta operación sería:
+Por ejemplo, si queremos calcular: 1.01 - 3.03 - 1.01 - 3.03, debemos saber que la operación RESTA no tiene las propiedades ni conmutativa ni asociativa y lo que, internamente, sabemos que se da prioridad a la ejecución de los cálculos de izquierda a derecha a la hora de llamar al API debemos extender la expresión aritmética a lo siguente: (((1.01 - 3.03) - 1.0.1) - 3.03) siendo el cURL de esta operación:
 curl --location --request POST 'http://localhost:8001/calculadora/operaciones' \
 --header 'Content-Type: application/json' \
 --data-raw '{
